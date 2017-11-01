@@ -66,10 +66,6 @@ public class Note implements Serializable {
         this.contents = contents;
     }
 
-    public Note(String contents) {
-        this.contents = contents;
-    }
-
     public Integer getNoteId() {
         return noteId;
     }

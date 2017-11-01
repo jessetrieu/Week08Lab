@@ -5,7 +5,7 @@ import domainmodel.Note;
 import java.io.IOException;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.servlet.ServletException;
@@ -31,9 +31,9 @@ public class NoteServlet extends HttpServlet {
             }
         }
         
-        ArrayList<Note> notes = null;        
+        List<Note> notes = null;        
         try {
-            notes = (ArrayList<Note>) us.getAll();
+            notes = us.getAll();
         } catch (Exception ex) {
             Logger.getLogger(NoteServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -49,13 +49,16 @@ public class NoteServlet extends HttpServlet {
         String contents = request.getParameter("contents");
         String action = request.getParameter("action");
         
-
+//when u insert u need to set a noteId value cuz the noteId auto increments in the database
+        if (noteId== null) {
+            noteId = "0";
+        }
         NoteService us = new NoteService();
 
         try {
             if (action.equals("delete")) {
                 String selectedNoteId = request.getParameter("selectedNoteId");
-                us.delete(Long.parseLong(selectedNoteId));
+                us.delete(Integer.parseInt(selectedNoteId));
             } else if (action.equals("edit")) {
                 Note note = new Note(Integer.parseInt(noteId), contents);
                 
@@ -68,9 +71,9 @@ public class NoteServlet extends HttpServlet {
             request.setAttribute("errorMessage", "Whoops.  Could not perform that action.");
         }
         
-        ArrayList<Note> notes = null;
+        List<Note> notes = null;
         try {
-            notes = (ArrayList<Note>) us.getAll();
+            notes = us.getAll();
         } catch (Exception ex) {
             Logger.getLogger(NoteServlet.class.getName()).log(Level.SEVERE, null, ex);
         }
