@@ -30,8 +30,8 @@ public class NoteService {
         return noteDB.delete(deletedNote);
     }
 
-    public int insert(String contents) throws Exception {
-        Note note = new Note(contents);
+    public int insert(int noteId,String contents) throws Exception {
+        Note note = new Note(noteId,contents);
         return noteDB.insert(note);
     }
 }

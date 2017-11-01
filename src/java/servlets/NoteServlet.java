@@ -61,7 +61,8 @@ public class NoteServlet extends HttpServlet {
                 
                 us.update(note.getNoteId(), note.getContents());
             } else if (action.equals("add")) {
-                us.insert(contents);
+                Note note = new Note(Integer.parseInt(noteId), contents);
+                us.insert(note.getNoteId(), note.getContents());
             }
         } catch (Exception ex) {
             request.setAttribute("errorMessage", "Whoops.  Could not perform that action.");

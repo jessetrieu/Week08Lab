@@ -7,7 +7,7 @@ USE NotesDB;
 CREATE TABLE Notes( 
     noteId INT NOT NULL AUTO_INCREMENT,
     dateCreated DATETIME NOT NULL,
-    contents VARCHAR(1000) NOT NULL,
+    contents VARCHAR(10000) NOT NULL,
     PRIMARY KEY (noteId)
 );
 
